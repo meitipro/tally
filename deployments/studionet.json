@@ -1,0 +1,372 @@
+{
+  "network": "studionet",
+  "chain_id": 61999,
+  "contract": "0xd8083238c9b62e06A793cc7a0d663E34d77B8639",
+  "explorer": "https://explorer-studio.genlayer.com/address/0xd8083238c9b62e06A793cc7a0d663E34d77B8639",
+  "source_sha256": "eb9a6595ba5b9a50e067ce4eb34bfc834a8d2715e3f5633d2b32d86c8e172a25",
+  "constructor": {
+    "grace_seconds": 300
+  },
+  "accounts": {
+    "buyer": "0x93178850cf85a9DBEBfb365f50B1Df700B310FF8",
+    "supplier": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+    "stranger": "0xd1E351F9C0a055670b8946F05C4688e2De854bc1"
+  },
+  "balances_before": {
+    "buyer": "5000000000000000000",
+    "supplier": "0",
+    "stranger": "0"
+  },
+  "held_after": "0",
+  "steps": [
+    {
+      "step": "deploy",
+      "tx": "0xf794fd389d116676378edde3628749d76bdbf9df659ebf35bc58466e9aa71b2e",
+      "status": "FINALIZED",
+      "ok": true,
+      "address": "0xd8083238c9b62e06A793cc7a0d663E34d77B8639"
+    },
+    {
+      "step": "order 0 opened: office supplies, three lines",
+      "method": "open",
+      "tx": "0x2c7289e460bd06f99e8c6a865c96283258112cfbc331e8d80a82ceb94571ac57",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "order 1 opened: runs five minutes",
+      "method": "open",
+      "tx": "0x1b460f3e6018886c07bcee0cfd7cbc8d3c14c9e4efb5e74846b0631ccdc7fe8b",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "order 1 closed before it ends",
+      "method": "close",
+      "tx": "0xfe6b986c2db0a8b03c37acaa59a0ded63f97afd8a6b5d6dc9d953bac3ab30ece",
+      "status": "ACCEPTED",
+      "ok": false,
+      "refusal": "[EXPECTED] the order runs until 2026-09-28T01:52:59Z"
+    },
+    {
+      "step": "order 2 opened: spare toner",
+      "method": "open",
+      "tx": "0x6deed466d5b494385d6f5775eaf3bcd686b5d0a94829460406bb0d7bef0d2e21",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "a stranger invoices order 0",
+      "method": "invoice",
+      "tx": "0x67e14aa2bce717d7fe42992f4ae892d13c60f1becc1d157f9dd533fd6892233c",
+      "status": "ACCEPTED",
+      "ok": false,
+      "refusal": "[EXPECTED] only the supplier may invoice this order"
+    },
+    {
+      "step": "invoice 1: paper, toner and a desk lamp",
+      "method": "invoice",
+      "tx": "0x766460965508af9fb83b53b5723f5ef3cd76ae0f2920ea748de60e2dc04f9a25",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "a second invoice while one waits",
+      "method": "invoice",
+      "tx": "0xf7a34208683f23b8d0c04a1e9ed2b5a0309e6e8ddd32a578d376f1557ba29a7a",
+      "status": "ACCEPTED",
+      "ok": false,
+      "refusal": "[EXPECTED] an invoice is waiting to be matched; either party may ask for it"
+    },
+    {
+      "step": "a stranger asks for the match",
+      "method": "match",
+      "tx": "0xb16e96284fbb6a04031feb85b8cd629549bdc65863b3c91ea734dde2aedca20a",
+      "status": "ACCEPTED",
+      "ok": false,
+      "refusal": "[EXPECTED] only the buyer or the supplier may ask for a match"
+    },
+    {
+      "step": "matched: paper and toner paid, the lamp was never ordered",
+      "method": "match",
+      "tx": "0x0b57926409c3a61324a11cc3284f3152210e857dcc3a1047bbec77574e00df59",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "the same invoice again",
+      "method": "invoice",
+      "tx": "0x61fbde1e0236140372459cb57b7ad6ad462daf04f0f9bd55a45ebff64efaea8f",
+      "status": "ACCEPTED",
+      "ok": false,
+      "refusal": "[EXPECTED] this invoice was already matched as invoice 1; change it to invoice what is still open"
+    },
+    {
+      "step": "invoice 2: too much paper, stapler above price",
+      "method": "invoice",
+      "tx": "0xea60781b87ee7c5bac4323161ae6fa347405a98b068ee70001e1936cab226646",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "matched: both lines refused by the arithmetic",
+      "method": "match",
+      "tx": "0x12aca38f3ef0437c5784c332b3a9447d7a03db8598ab26246fadac4fdebf6ae8",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "invoice 3: the rest, stapler below price",
+      "method": "invoice",
+      "tx": "0x2ad3401fe0cf99d87eb74c2171746db86b2877491c817aa0107a2849ea186499",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "matched: order 0 fulfilled, the difference back",
+      "method": "match",
+      "tx": "0x9209ca46230c69fc15481254d46ee15a12ec1f163f7671b16fd07f3d94de1cee",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "order 2 released by the supplier",
+      "method": "release",
+      "tx": "0xe207bdedbfe27eebce1cf50039ce9fab4900a9299cd1416e6cb33e930b243d5c",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    },
+    {
+      "step": "order 1 closed after it ended",
+      "method": "close",
+      "tx": "0x12ff7f7fbe498c86dbcd7e912aa91a34d45517b7dd90440b589cbde2a0593365",
+      "status": "ACCEPTED",
+      "ok": true,
+      "refusal": ""
+    }
+  ],
+  "orders": [
+    {
+      "order": {
+        "buyer": "0x93178850cf85a9DBEBfb365f50B1Df700B310FF8",
+        "closed_at": "2026-09-28T01:52:06Z",
+        "closed_how": "fulfilled",
+        "ends_at": "2026-09-28T02:47:39Z",
+        "funded": "960000000000000000",
+        "grace_ends": "2026-09-28T02:52:39Z",
+        "held": "0",
+        "invoices": 3,
+        "lines": 3,
+        "opened_at": "2026-09-28T01:47:39Z",
+        "paid": "954000000000000000",
+        "pending": false,
+        "refunded": "6000000000000000",
+        "status": "fulfilled",
+        "supplier": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+        "title": "Office supplies for the Harbour branch, Q4"
+      },
+      "lines": [
+        {
+          "index": 0,
+          "order": 0,
+          "quantity": 10,
+          "remaining": 0,
+          "text": "A4 copier paper, 80 gsm, box of 5 reams",
+          "unit_price": "50000000000000000"
+        },
+        {
+          "index": 1,
+          "order": 0,
+          "quantity": 2,
+          "remaining": 0,
+          "text": "Black toner cartridge for HP LaserJet M404",
+          "unit_price": "200000000000000000"
+        },
+        {
+          "index": 2,
+          "order": 0,
+          "quantity": 3,
+          "remaining": 0,
+          "text": "Full-strip metal desk stapler",
+          "unit_price": "20000000000000000"
+        }
+      ],
+      "invoices": [
+        {
+          "at": "2026-09-28T01:49:13.570575Z",
+          "by": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+          "id": 0,
+          "lines": [
+            {
+              "invoice": 0,
+              "match": "0",
+              "paid": "300000000000000000",
+              "quantity": 6,
+              "state": "accepted",
+              "text": "Copy paper A4 80g, 5-ream box",
+              "unit_price": "50000000000000000"
+            },
+            {
+              "invoice": 0,
+              "match": "1",
+              "paid": "400000000000000000",
+              "quantity": 2,
+              "state": "accepted",
+              "text": "HP LaserJet M404 black toner cartridge",
+              "unit_price": "200000000000000000"
+            },
+            {
+              "invoice": 0,
+              "match": "none",
+              "paid": "0",
+              "quantity": 1,
+              "state": "unmatched",
+              "text": "LED desk lamp with USB charging port",
+              "unit_price": "100000000000000000"
+            }
+          ],
+          "matched": true,
+          "order": 0,
+          "reason_is_leader_supplied": true,
+          "seq": 1,
+          "total_paid": "700000000000000000",
+          "why": "I0 and I1 match order items 0 and 1; I2 is a desk lamp not listed in the order."
+        },
+        {
+          "at": "2026-09-28T01:50:54.310947Z",
+          "by": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+          "id": 1,
+          "lines": [
+            {
+              "invoice": 1,
+              "match": "0",
+              "paid": "0",
+              "quantity": 5,
+              "state": "over_quantity",
+              "text": "Copy paper A4 80 gsm, box of five reams",
+              "unit_price": "50000000000000000"
+            },
+            {
+              "invoice": 1,
+              "match": "2",
+              "paid": "0",
+              "quantity": 3,
+              "state": "overpriced",
+              "text": "Metal stapler, full strip",
+              "unit_price": "25000000000000000"
+            }
+          ],
+          "matched": true,
+          "order": 0,
+          "reason_is_leader_supplied": true,
+          "seq": 2,
+          "total_paid": "0",
+          "why": "A4 80 gsm box of five reams matches copier paper; full-strip metal stapler matches desk stapler."
+        },
+        {
+          "at": "2026-09-28T01:51:43.168807Z",
+          "by": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+          "id": 2,
+          "lines": [
+            {
+              "invoice": 2,
+              "match": "0",
+              "paid": "200000000000000000",
+              "quantity": 4,
+              "state": "accepted",
+              "text": "Copier paper, A4, 80 gsm (5 reams per box)",
+              "unit_price": "50000000000000000"
+            },
+            {
+              "invoice": 2,
+              "match": "2",
+              "paid": "54000000000000000",
+              "quantity": 3,
+              "state": "accepted",
+              "text": "Full strip metal stapler for desks",
+              "unit_price": "18000000000000000"
+            }
+          ],
+          "matched": true,
+          "order": 0,
+          "reason_is_leader_supplied": true,
+          "seq": 3,
+          "total_paid": "254000000000000000",
+          "why": "A4 80gsm copier paper box matches order 0; full-strip metal desk stapler matches order 2."
+        }
+      ]
+    },
+    {
+      "order": {
+        "buyer": "0x93178850cf85a9DBEBfb365f50B1Df700B310FF8",
+        "closed_at": "2026-09-28T01:53:26Z",
+        "closed_how": "closed",
+        "ends_at": "2026-09-28T01:52:59Z",
+        "funded": "100000000000000000",
+        "grace_ends": "2026-09-28T01:57:59Z",
+        "held": "0",
+        "invoices": 0,
+        "lines": 1,
+        "opened_at": "2026-09-28T01:47:59Z",
+        "paid": "0",
+        "pending": false,
+        "refunded": "100000000000000000",
+        "status": "closed",
+        "supplier": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+        "title": "Printer service visit, Harbour branch"
+      },
+      "lines": [
+        {
+          "index": 0,
+          "order": 1,
+          "quantity": 1,
+          "remaining": 1,
+          "text": "On-site service visit for the office printers",
+          "unit_price": "100000000000000000"
+        }
+      ],
+      "invoices": []
+    },
+    {
+      "order": {
+        "buyer": "0x93178850cf85a9DBEBfb365f50B1Df700B310FF8",
+        "closed_at": "2026-09-28T01:52:38Z",
+        "closed_how": "released",
+        "ends_at": "2026-09-28T02:48:40Z",
+        "funded": "200000000000000000",
+        "grace_ends": "2026-09-28T02:53:40Z",
+        "held": "0",
+        "invoices": 0,
+        "lines": 1,
+        "opened_at": "2026-09-28T01:48:40Z",
+        "paid": "0",
+        "pending": false,
+        "refunded": "200000000000000000",
+        "status": "closed",
+        "supplier": "0xB71D89724C164a3A68517Ae0Bfb6774C4612A9e2",
+        "title": "Spare toner for the second office"
+      },
+      "lines": [
+        {
+          "index": 0,
+          "order": 2,
+          "quantity": 1,
+          "remaining": 1,
+          "text": "Black toner cartridge for HP LaserJet M404",
+          "unit_price": "200000000000000000"
+        }
+      ],
+      "invoices": []
+    }
+  ]
+}

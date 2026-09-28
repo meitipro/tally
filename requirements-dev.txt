@@ -1,0 +1,9 @@
+# Unit, end-to-end and runbook tests need only this:
+pytest>=8.0
+
+# scripts/demo.py and the opt-in integration tests talk to StudioNet through
+# genlayer-py. 0.18 is the line that reads and writes studionet.
+genlayer-py==0.18.0
+
+# scripts/verify_deployment.py lints the source it reads back off chain.
+genvm-linter
