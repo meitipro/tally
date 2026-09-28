@@ -317,5 +317,5 @@ Measured: **72 mutations, 72 caught, 0 escaped.**
 ## Related work
 
 - [Tranche](https://github.com/meitipro1/tranche) - an escrow released clause by clause; Tally pays line by line against an order
-- [Mandate](https://github.com/meitipro1/mandate) - a treasury that pays only what its charter allows
+- [Mandate](https://github.com/meitipro/mandate) - a treasury that pays only what its charter allows
 - [Verbatim](https://github.com/meitipro1/verbatim) - settles what code can settle before any model is asked
